@@ -342,10 +342,20 @@ impl Descriptors {
         self.messages_by_name.get(name).map(|m| &self.messages[m.0])
     }
 
+    /// Retrive all message names that are known about
+    pub fn iter_messages(&self) -> impl Iterator<Item = &MessageDescriptor> {
+        self.messages.iter().map(|m| m)
+    }
+
     /// Looks up an enum by its fully qualified name (i.e. `.foo.package.Enum`).
     #[inline]
     pub fn enum_by_name(&self, name: &str) -> Option<&EnumDescriptor> {
         self.enums_by_name.get(name).map(|e| &self.enums[e.0])
+    }
+
+    /// Retrive all enums that are known about
+    pub fn iter_enums(&self) -> impl Iterator<Item = &EnumDescriptor> {
+        self.enums.iter().map(|e| e)
     }
 
     /// Adds all types defined in the specified protocol buffer file descriptor set to this
